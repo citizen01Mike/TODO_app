@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TODOList.Migrations.Data;
-using TODOList.Models;
+using TODOList.Data;
 using TODOList.Models.Entities;
+using TODOList.Models.ViewModels;
 
 namespace TODOList.Controllers
 {
@@ -14,7 +14,6 @@ namespace TODOList.Controllers
         {
             _dbContext = dbContext;
         }
-        [HttpGet]
         
         [HttpPost]
         public async Task<IActionResult> Add(AddTodoViewModel viewModel)
@@ -65,6 +64,7 @@ namespace TODOList.Controllers
                 todo.IsCompleted = viewModel.IsCompleted;
 
                 await _dbContext.SaveChangesAsync();
+
                 return RedirectToAction("List", "Todos");
             }
 
@@ -99,7 +99,7 @@ namespace TODOList.Controllers
             _dbContext.Update(todo);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("List", "Todos"); // Assuming 'Index' is the action where your list is displayed
+            return RedirectToAction("List", "Todos");
         }
     }
 }
