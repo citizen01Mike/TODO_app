@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TODOList.Migrations.Data;
+using TODOList.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,6 @@ builder.Services.AddDbContext<TodoDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoDb"));
 });
-
 
 var app = builder.Build();
 
@@ -29,4 +28,3 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Todos}/{action=List}/{id?}");
 app.Run();
-

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TODOList.Models;
+using TODOList.Models.ViewModels;
 
 namespace TODOList.Controllers
 {
@@ -17,12 +18,7 @@ namespace TODOList.Controllers
         {
             return View();
         }
-
-       /* public IActionResult Privacy()
-        {
-            return View();
-        }*/
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
