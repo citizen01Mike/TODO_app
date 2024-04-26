@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TODOList.Models;
-using TODOList.Models.ViewModels;
+using TODOList.Todo.Core.Models;
+using TODOList.Todo.Core.Models.ViewModels;
+using TODOList.Todo.Services.DbContext;
 
 namespace TODOList.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly TodoDbContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(TodoDbContext dbContext)
         {
-            _logger = logger;
+            _dbContext = dbContext;
         }
-
+        
         public IActionResult Index()
         {
             return View();

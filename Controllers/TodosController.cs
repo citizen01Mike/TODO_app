@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TODOList.Data;
-using TODOList.Models.Entities;
-using TODOList.Models.ViewModels;
+using TODOList.Todo.Core.Models.ViewModels;
+using TODOList.Todo.Core.Models.Entities;
+using TODOList.Todo.Services.DbContext;
 
 namespace TODOList.Controllers
 {
@@ -16,11 +16,11 @@ namespace TODOList.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> Add(AddTodoViewModel viewModel)
+        public async Task<IActionResult> Add(TodoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                var todo = new Todo
+                var todo = new Todo.Core.Models.Entities.Todo
                 {
                     Name = viewModel.Name,
                     Description = viewModel.Description,
@@ -53,15 +53,15 @@ namespace TODOList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Todo viewModel)
+        public async Task<IActionResult> Edit(Todo.Core.Models.Entities.Todo todos)
         {
-            var todo = await _dbContext.TodoItems.FindAsync(viewModel.Id);
+            var todo = await _dbContext.TodoItems.FindAsync(todos.Id);
 
             if (todo is not null)
             {
-                todo.Name = viewModel.Name;
-                todo.Description = viewModel.Description;
-                todo.IsCompleted = viewModel.IsCompleted;
+                todo.Name = todos.Name;
+                todo.Description = todos.Description;
+                todo.IsCompleted = todos.IsCompleted;
 
                 await _dbContext.SaveChangesAsync();
 
@@ -72,24 +72,24 @@ namespace TODOList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Todo viewModel)
+        public async Task<IActionResult> Delete(Todo.Core.Models.Entities.Todo todos)
         {
             var todo = await _dbContext.TodoItems
                 .AsNoTracking()
-                .FirstOrDefaultAsync(v => v.Id == viewModel.Id);
+                .SingleOrDefaultAsync(v => v.Id == todos.Id);
 
             if (todo is not null)
             {
-                _dbContext.TodoItems.Remove(viewModel);
+                _dbContext.TodoItems.Remove(todos);
                 await _dbContext.SaveChangesAsync();
             }
 
             return RedirectToAction("List", "Todos");
         }
 
-        public async Task<IActionResult> MarkAsDone(Todo viewModel)
+        public async Task<IActionResult> MarkAsDone(Todo.Core.Models.Entities.Todo todos)
         {
-            var todo = await _dbContext.TodoItems.FirstOrDefaultAsync(t => t.Id == viewModel.Id);
+            var todo = await _dbContext.TodoItems.SingleOrDefaultAsync(t => t.Id == todos.Id);
             if (todo == null)
             {
                 return NotFound();
