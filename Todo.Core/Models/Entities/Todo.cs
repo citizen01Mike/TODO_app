@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace TODOList.Models.Entities
+﻿namespace TODOList.Todo.Core.Models.Entities
 {
     public class Todo
     {

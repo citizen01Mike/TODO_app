@@ -1,6 +1,6 @@
-﻿namespace TODOList.Models.ViewModels
+﻿namespace TODOList.Todo.Core.Models.ViewModels
 {
-    public class AddTodoViewModel
+    public class TodoViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
