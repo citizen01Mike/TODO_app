@@ -20,4 +20,8 @@
     <ProjectReference Include="..\TODOList.Tests\TODOList.Tests.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Forms\" />
+  </ItemGroup>
+
 </Project>

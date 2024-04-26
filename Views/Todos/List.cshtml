@@ -1,6 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using TODOList.TodoCore.Models.Entities;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model List<TODOList.Todo.Core.Models.Entities.Todo>
+@model List<Todo>
 
 <h1>Todos</h1>
 
@@ -14,17 +15,17 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var todo in Model)
-    {
-        <tr class="@(todo.IsCompleted ? "completed" : "")">
-            <td>@todo.Id</td>
-            <td>@todo.Name</td>
-            <td>@todo.Description</td>
-            <td>
-                <a class="btn btn-primary" asp-controller="Todos" asp-action="Edit" asp-route-id="@todo.Id">Edit</a>
-            </td>
-        </tr>
-    }
+        @foreach (var todo in Model)
+        {
+            <tr class="@(todo.IsCompleted ? "completed" : "")">
+                <td>@todo.Id</td>
+                <td>@todo.Name</td>
+                <td>@todo.Description</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Todos" asp-action="Edit" asp-route-id="@todo.Id">Edit</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
@@ -33,3 +34,34 @@
         text-decoration: line-through;
     }
 </style>
+
+<h2>SearchTodo</h2>
+<form asp-action="SearchTodo" asp-controller="Todos" method="get">
+    <div class="form-group">
+        <label for="searchTerm">SearchTodos:</label>
+        <input type="text" v-model="searchTerm" @@keyup.enter="searchTodos" class="form-control">
+        <button @@click="searchTodos" class="btn btn-default">Search</button>
+    </div>
+</form>    
+
+<script>
+    new Vue({
+        el: '#todoApp',
+        data: {
+            todo: {
+                name: '',
+                description: ''
+            }
+        },
+        methods: {
+            searchTodos() {
+                fetch(`/Todos/Search?searchTerm=${this.searchTerm}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.todos = data;  // Assuming you have 'todos' data property to bind your results
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    });
+</script>

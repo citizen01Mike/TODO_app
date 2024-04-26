@@ -1,26 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TODOList.Todo.Core.Models.ViewModels;
-using TODOList.Todo.Core.Models.Entities;
-using TODOList.Todo.Services.DbContext;
+using TODOList.TodoCore.Models.Entities;
+using TODOList.TodoCore.Models.ViewModels;
+using TODOList.TodoCore.Services.Interface;
+using TODOList.TodoServices;
 
 namespace TODOList.Controllers
 {
     public class TodosController : Controller
     {
         private readonly TodoDbContext _dbContext;
+        private readonly ITodoService _todoService;
 
         public TodosController(TodoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Add(TodoViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                var todo = new Todo.Core.Models.Entities.Todo
+                var todo = new Todo
                 {
                     Name = viewModel.Name,
                     Description = viewModel.Description,
@@ -53,7 +55,7 @@ namespace TODOList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Todo.Core.Models.Entities.Todo todos)
+        public async Task<IActionResult> Edit(Todo todos)
         {
             var todo = await _dbContext.TodoItems.FindAsync(todos.Id);
 
@@ -72,7 +74,7 @@ namespace TODOList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Todo.Core.Models.Entities.Todo todos)
+        public async Task<IActionResult> Delete(Todo todos)
         {
             var todo = await _dbContext.TodoItems
                 .AsNoTracking()
@@ -87,7 +89,7 @@ namespace TODOList.Controllers
             return RedirectToAction("List", "Todos");
         }
 
-        public async Task<IActionResult> MarkAsDone(Todo.Core.Models.Entities.Todo todos)
+        public async Task<IActionResult> MarkAsDone(Todo todos)
         {
             var todo = await _dbContext.TodoItems.SingleOrDefaultAsync(t => t.Id == todos.Id);
             if (todo == null)
@@ -100,6 +102,12 @@ namespace TODOList.Controllers
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("List", "Todos");
+        }
+
+        public IActionResult SearchTodo(string searchTerm)
+        {
+            var results = _todoService.Search(searchTerm);
+            return View("Search");  // Assuming you want to reuse the Index view to display results
         }
     }
 }
