@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TODOList.Data;
-using TODOList.Models.Entities;
-using TODOList.Models.ViewModels;
+using TODOList.Todo.Core.Models.ViewModels;
+using TODOList.Todo.Services.DbContext;
 
 namespace TODOList.Controllers
 {
