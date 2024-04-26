@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TODOList.Todo.Core.Models;
-using TODOList.Todo.Core.Models.ViewModels;
-using TODOList.Todo.Services.DbContext;
+using TODOList.TodoCore.Models.ViewModels;
+using TODOList.TodoServices;
 
 namespace TODOList.Controllers
 {

@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using TODOList.TodoCore.Models.ViewModels;
+
+@model TodoViewModel
+
+<h1>SearchTodo</h1>
+
+@if (Model is null)
+{
+    <p>NoTodo</p>
+}

@@ -4,7 +4,7 @@
 
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
-@model TODOList.Todo.Core.Models.ViewModels.TodoViewModel
+@model TODOList.TodoCore.Models.ViewModels.TodoViewModel
 
 <h1>Add Todo</h1>
 
@@ -12,19 +12,19 @@
 
     <div class="mt-3">
         <label class="form-label">Name</label>
-        <input type="text" class="form-control" asp-for="Name"/>
+        <input type="text" class="form-control" asp-for="Name" />
     </div>
 
     <div class="mt-3">
         <label class="form-label">Description</label>
-        <input type="text" class="form-control" asp-for="Description"/>
+        <input type="text" class="form-control" asp-for="Description" />
     </div>
 
     <div class="mt-3">
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>
-
+    
 <h2>FunCounter</h2>
 
 <!-- Vue.js Counter -->
@@ -42,7 +42,7 @@
                 count: 0
             },
             methods: {
-                increment: function() {
+                increment: function () {
                     this.count++;
                 }
             }

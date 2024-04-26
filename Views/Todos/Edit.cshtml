@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using TODOList.TodoCore.Models.Entities;
 
-@model TODOList.Todo.Core.Models.Entities.Todo
+@model Todo
 
 <h1>Edit Todo</h1>
 
@@ -37,8 +38,9 @@ else
 
             <button type="submit" class="btn btn-danger ms-3"
                     asp-action="Delete"
-                    asp-controller="Todos">Delete</button>
+                    asp-controller="Todos">
+                Delete
+            </button>
         </div>
     </form>
 }
-
