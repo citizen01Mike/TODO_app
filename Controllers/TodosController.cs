@@ -27,6 +27,7 @@ namespace TODOList.Controllers
                 {
                     Name = viewModel.Name,
                     Description = viewModel.Description,
+                    Amount = viewModel.Amount,
                     IsCompleted = false
                 };
 
@@ -64,6 +65,7 @@ namespace TODOList.Controllers
             {
                 todo.Name = todos.Name;
                 todo.Description = todos.Description;
+                todo.Amount = todos.Amount;
                 todo.IsCompleted = todos.IsCompleted;
 
                 await _dbContext.SaveChangesAsync();
