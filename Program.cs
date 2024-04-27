@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using TODOList.Services.Todos;
+using TODOList.TodoCore.Services.Interface;
 using TODOList.TodoServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<TodoDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoDb"));
 });
+builder.Services.AddTransient<ITodoService, TodoService>();
 
 var app = builder.Build();
 

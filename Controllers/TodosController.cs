@@ -12,9 +12,10 @@ namespace TODOList.Controllers
         private readonly TodoDbContext _dbContext;
         private readonly ITodoService _todoService;
 
-        public TodosController(TodoDbContext dbContext)
+        public TodosController(TodoDbContext dbContext, ITodoService service)
         {
             _dbContext = dbContext;
+            _todoService = service;
         }
 
         [HttpPost]
@@ -104,10 +105,20 @@ namespace TODOList.Controllers
             return RedirectToAction("List", "Todos");
         }
 
+        [HttpGet]
         public IActionResult SearchTodo(string searchTerm)
         {
-            var results = _todoService.Search(searchTerm);
-            return View("Search");  // Assuming you want to reuse the Index view to display results
+            List<Todo> results;
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                results = _dbContext.TodoItems.ToList();
+            }
+            else
+            {
+                results = _todoService.Search(searchTerm);
+            }
+
+            return View("List", results);
         }
     }
 }
