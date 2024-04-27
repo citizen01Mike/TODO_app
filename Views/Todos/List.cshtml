@@ -11,6 +11,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Amount</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
                 <td>@todo.Id</td>
                 <td>@todo.Name</td>
                 <td>@todo.Description</td>
+                <td>@todo.Amount</td>
                 <td>
                     <a class="btn btn-primary" asp-controller="Todos" asp-action="Edit" asp-route-id="@todo.Id">Edit</a>
                 </td>

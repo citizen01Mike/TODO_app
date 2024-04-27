@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\" />
+    <Folder Include="TodoCore\Forms\" />
   </ItemGroup>
 
 </Project>

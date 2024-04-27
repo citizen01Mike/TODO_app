@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using TODOList.Services.Todos;
 using TODOList.TodoCore.Services.Interface;
 using TODOList.TodoServices;
 
