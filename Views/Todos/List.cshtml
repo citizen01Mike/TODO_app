@@ -5,7 +5,7 @@
 
 <h1>Todos</h1>
 
-<table class="table">
+<table class="table" border="1">
     <thead>
         <tr>
             <th>Id</th>
@@ -36,13 +36,15 @@
 </style>
 
 <h2>SearchTodo</h2>
-<form asp-action="SearchTodo" asp-controller="Todos" method="get">
+
+@using (Html.BeginForm("SearchTodo", "Todos", FormMethod.Get, new { @class = "form-inline" }))
+{
     <div class="form-group">
         <label for="searchTerm">SearchTodos:</label>
-        <input type="text" v-model="searchTerm" @@keyup.enter="searchTodos" class="form-control">
-        <button @@click="searchTodos" class="btn btn-default">Search</button>
+        <input type="text" name="searchTerm" class="form-control" value="@ViewBag.SearchTerm" placeholder="Enter search term">
+        <button type="submit" class="btn btn-default">Search</button>
     </div>
-</form>    
+}
 
 <script>
     new Vue({
@@ -55,10 +57,10 @@
         },
         methods: {
             searchTodos() {
-                fetch(`/Todos/Search?searchTerm=${this.searchTerm}`)
+                fetch(`/Todos/List?searchTerm=${this.searchTerm}`)
                     .then(response => response.json())
                     .then(data => {
-                        this.todos = data;  // Assuming you have 'todos' data property to bind your results
+                        this.todos = data;
                     })
                     .catch(error => console.error('Error:', error));
             }

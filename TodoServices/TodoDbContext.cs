@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TODOList.TodoCore.Models.Entities;
 
 namespace TODOList.TodoServices
 {
@@ -8,6 +9,6 @@ namespace TODOList.TodoServices
         {
         }
 
-        public DbSet<TodoCore.Models.Entities.Todo> TodoItems { get; set; }
+        public DbSet<Todo> TodoItems { get; set; }
     }
 }

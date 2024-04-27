@@ -15,14 +15,12 @@ namespace TODOList.Services.Todos
         
         public List<Todo> Search(string searchTerm)
         {
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                return _dbContext.TodoItems
-                .Where(t => t.Name.Contains(searchTerm) || t.Description.Contains(searchTerm))
-                .ToList();
-            }
+            searchTerm = searchTerm.Trim().ToLower();
 
-            return _dbContext.TodoItems.ToList();
+            return  _dbContext.TodoItems
+                .Where(t => t.Name.Contains(searchTerm) || t.Description
+                .Contains(searchTerm))
+                .ToList();
         }
     }
 }

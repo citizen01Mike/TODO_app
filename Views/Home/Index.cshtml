@@ -6,7 +6,7 @@
 
 @model TODOList.TodoCore.Models.ViewModels.TodoViewModel
 
-<h1>Add Todo</h1>
+<h1>AddTodo</h1>
 
 <form asp-action="Add" asp-controller="Todos" method="post">
 
@@ -24,7 +24,7 @@
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>
-    
+
 <h2>FunCounter</h2>
 
 <!-- Vue.js Counter -->
@@ -48,9 +48,8 @@
             }
         });
     </script>
-}
 
-<script>
+    <script>
     new Vue({
         el: '#todoApp',
         data: {
@@ -82,4 +81,5 @@
             }
         }
     });
-</script>
+    </script>
+}
